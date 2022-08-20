@@ -13,6 +13,7 @@ class CellCollectionViewCell: UICollectionViewCell {
     private var image: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -50,7 +51,7 @@ class CellCollectionViewCell: UICollectionViewCell {
     
     func setupCell(information: NewReponse) {
         self.titleLabel.text = information.title
-        self.image.image = UIImage(systemName: information.imageName)
+        self.image.image = UIImage()
         self.authorLabel.text = information.authors
         self.descriptionLabel.text = information.description
     }

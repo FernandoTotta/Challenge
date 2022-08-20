@@ -19,6 +19,8 @@
 		EDB710A128AE95D900DCD88B /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB710A028AE95D900DCD88B /* CodeView.swift */; };
 		EDB710A528AE97A700DCD88B /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB710A428AE97A700DCD88B /* HeaderCollectionReusableView.swift */; };
 		EDB710A728AE983F00DCD88B /* CellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB710A628AE983F00DCD88B /* CellCollectionViewCell.swift */; };
+		EDB710AE28AFCC6000DCD88B /* NewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB710AD28AFCC6000DCD88B /* NewService.swift */; };
+		EDB710B028AFE40100DCD88B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB710AF28AFE40100DCD88B /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		EDB710A028AE95D900DCD88B /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		EDB710A428AE97A700DCD88B /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		EDB710A628AE983F00DCD88B /* CellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCollectionViewCell.swift; sourceTree = "<group>"; };
+		EDB710AD28AFCC6000DCD88B /* NewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewService.swift; sourceTree = "<group>"; };
+		EDB710AF28AFE40100DCD88B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 		EDB7103328AE7B6D00DCD88B /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				EDB710AA28AFCBC000DCD88B /* Services */,
 				EDB7109E28AE95BE00DCD88B /* SupportFiles */,
 				EDB7109628AE8CDA00DCD88B /* News */,
 				EDB7103428AE7B6D00DCD88B /* AppDelegate.swift */,
@@ -164,6 +169,7 @@
 		EDB7109928AE8D0000DCD88B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EDB710AF28AFE40100DCD88B /* File.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +204,22 @@
 				EDB710A428AE97A700DCD88B /* HeaderCollectionReusableView.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		EDB710AA28AFCBC000DCD88B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EDB710AC28AFCC3B00DCD88B /* Shared */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EDB710AC28AFCC3B00DCD88B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				EDB710AD28AFCC6000DCD88B /* NewService.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +358,8 @@
 				EDB7103728AE7B6D00DCD88B /* SceneDelegate.swift in Sources */,
 				EDB710A128AE95D900DCD88B /* CodeView.swift in Sources */,
 				EDB710A528AE97A700DCD88B /* HeaderCollectionReusableView.swift in Sources */,
+				EDB710AE28AFCC6000DCD88B /* NewService.swift in Sources */,
+				EDB710B028AFE40100DCD88B /* File.swift in Sources */,
 				EDB7109D28AE8D2E00DCD88B /* NewsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
