@@ -8,7 +8,7 @@
 import UIKit
 
 class NewsViewController: UIViewController, UICollectionViewDelegate {
-
+    var listOfArtickes: [NewTitle: [NewReponse]]?
     typealias DataSource = UICollectionViewDiffableDataSource<NewTitle, NewReponse>
     typealias SnapShot = NSDiffableDataSourceSnapshot<NewTitle, NewReponse>
     lazy var datasource = makeDataSource()
@@ -27,9 +27,38 @@ class NewsViewController: UIViewController, UICollectionViewDelegate {
             sharedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sharedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             sharedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        
+            
         ])
-        testUICollection()
+        let url = NewService.shared.baseUrl
+        NewService.shared.getAllArticles { result in
+            switch result {
+            case .success(let test):
+                self.listOfArtickes = self.formattedArticles(articles: test)
+            case .failure(let err):
+                print(err)
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now()+2) { [self] in
+            testUI()
+        }
+       
+    }
+    
+    func formattedArticles(articles: [Article]) -> [NewTitle: [NewReponse]] {
+        var list: [NewReponse] = []
+        articles.forEach { article in
+            article.articles.forEach{ item in
+                list.append(NewReponse(imageName: item.urlToImage!,
+                                       authors: item.author ?? "",
+                                       title: item.title!,
+                                       description: item.description!,
+                                       indexer: NewTitle(title: article.howsCalls!))
+                )
+            }
+        }
+        
+        let dict = Dictionary(grouping: list) {$0.indexer}
+        return dict
     }
     
     func makeDataSource() -> DataSource {
@@ -53,27 +82,27 @@ class NewsViewController: UIViewController, UICollectionViewDelegate {
         }
         return datasource
     }
-
     
-
-    
-    func getAntherMethod() -> [Title: [Informations]] {
-        var informationArr: [Informations] = []
-        let arr = [AllInformation(imageName: "square.and.arrow.down", authors: "Mac", title: "Pq mac e melhor que windows?", description: "PQ sim", indexer: "All articles mentioning Apple"),
-                    AllInformation(imageName: "bell", authors: "Fernando", title: "Elon Musk é ", description: "Genio?", indexer: "All articles about Tesla")]
-        
-        arr.forEach { information in
-            let information = Informations(
-                imageName: information.imageName,
-                authors: information.authors,
-                title: information.title,
-                description: information.description,
-                indexer: Title(title: information.indexer)
-            )
-            
-            informationArr.append(information)
+    func testUI() {
+        var snapshot = SnapShot()
+        self.listOfArtickes!.forEach { section in
+            snapshot.appendSections([section.key])
+            section.value.forEach {rows in
+                snapshot.appendItems(section.value, toSection: rows.indexer)
+            }
         }
-        let dict = Dictionary(grouping: informationArr) {$0.indexer}
-        return dict
+        datasource.apply(snapshot, animatingDifferences: true)
     }
+}
+
+struct NewReponse: Hashable{
+    var imageName: URL
+    var authors: String
+    var title: String
+    var description: String
+    var indexer: NewTitle
+}
+
+struct NewTitle: Hashable {
+    var title: String
 }
