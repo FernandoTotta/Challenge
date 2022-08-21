@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Article.swift
 //  Challenge
 //
 //  Created by Fernando on 19/08/22.
@@ -17,4 +17,6 @@ struct ResponseAPI: Decodable {
     var author: String?
     var title: String?
     var description: String?
+    var publishedAt: String?
+    var content: String?
 }

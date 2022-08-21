@@ -94,10 +94,10 @@ extension NewsView: CodeView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            newsListCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            newsListCollectionView.topAnchor.constraint(equalTo: topAnchor),
             newsListCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             newsListCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            newsListCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            newsListCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
