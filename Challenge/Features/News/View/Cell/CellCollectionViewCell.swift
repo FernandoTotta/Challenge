@@ -10,10 +10,17 @@ import UIKit
 class CellCollectionViewCell: UICollectionViewCell {
     //MARK: - UI Property
     static let identifier = "\(CellCollectionViewCell.self)"
+    
+    private var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     private var image: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleToFill
         return image
     }()
     
@@ -42,6 +49,7 @@ class CellCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setup()
         contentView.layer.cornerRadius = 10
+        contentView.backgroundColor = .lightGray
     }
     
     @available(*, unavailable)
@@ -49,11 +57,33 @@ class CellCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(information: NewReponse) {
+    func setupCell(information: FormattedResponse) {
         self.titleLabel.text = information.title
-        self.image.image = UIImage()
+        loadImage(url: information.imageName)
         self.authorLabel.text = information.authors
         self.descriptionLabel.text = information.description
+    }
+    
+    private func loadImage(url: URL) {
+        spinner.startAnimating()
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.spinner.stopAnimating()
+                        self.image.image = image
+                    }
+                }
+            }
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.image.image = nil
+        self.titleLabel.text = nil
+        self.authorLabel.text = nil
+        self.descriptionLabel.text = nil
     }
 }
 
@@ -61,6 +91,7 @@ extension CellCollectionViewCell: CodeView {
     //MARK: - Setup constraints 
     func setupComponents() {
         contentView.addSubview(image)
+        image.addSubview(spinner)
         contentView.addSubview(authorLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
@@ -71,7 +102,7 @@ extension CellCollectionViewCell: CodeView {
         setupConstrainsAuthorLabel()
         setupConstraintsTitleLabel()
         setupConstraintsDescriptionLabel()
-        
+        setupConstraintsSpinner()
     }
     
     private func setupConstraintsImageView() {
@@ -104,6 +135,13 @@ extension CellCollectionViewCell: CodeView {
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 5),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 32),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -32)
+        ])
+    }
+    
+    private func setupConstraintsSpinner() {
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: image.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: image.centerYAnchor)
         ])
     }
 }

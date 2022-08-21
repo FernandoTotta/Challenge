@@ -8,10 +8,9 @@
 import Foundation
 
 class NewService {
-    static let shared = NewService()
     
     private let urlSession = URLSession.shared
-    let baseUrl = URL(string: "https://newsapi.org/v2")!
+    private let baseUrl = URL(string: "https://newsapi.org/v2")!
     private let apiKey = "d30e5673a7cf488d8afcd30a9f1aa684"
     
     private let jsonDecoder: JSONDecoder = {
@@ -24,11 +23,10 @@ class NewService {
     }
     
     enum Topics: String {
-        case apple = "apple"
-        case tesla = "tesla"
-        case microsoft = "Microsoft"
-        case google = "Google"
-        case meta = "Meta"
+        case apple = "News Of Apple"
+        case tesla = "News Of Tesla"
+        case microsoft = "News Of Microsoft"
+        case google = "News Of Google"
     }
     
     public enum APIServiceError: Error {
@@ -39,7 +37,7 @@ class NewService {
         case decodeError
     }
     
-    func fetchResources<T: Decodable>(
+    private func fetchResources<T: Decodable>(
         url: URL,
         query: Topics,
         completion: @escaping (_ topics: Topics, (Result<T ,APIServiceError>)) -> Void
