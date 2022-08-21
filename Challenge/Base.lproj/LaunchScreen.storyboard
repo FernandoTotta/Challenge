@@ -13,8 +13,19 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appstore" translatesAutoresizingMaskIntoConstraints="NO" id="EBP-DP-jbG">
+                                <rect key="frame" x="0.0" y="-64" width="414" height="1024"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EBP-DP-jbG" secondAttribute="trailing" id="6is-y4-Hl4"/>
+                            <constraint firstItem="EBP-DP-jbG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CxY-2q-sZM"/>
+                            <constraint firstItem="EBP-DP-jbG" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="GCs-jG-QJ0"/>
+                            <constraint firstItem="EBP-DP-jbG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZT6-vp-5M1"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,4 +33,11 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+
+    <resources>
+        <image name="appstore" width="1024" height="1024"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
